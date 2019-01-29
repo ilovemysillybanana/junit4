@@ -84,10 +84,15 @@
     </ciManagement>
     <distributionManagement>
         <downloadUrl>https://github.com/junit-team/junit4/wiki/Download-and-Install</downloadUrl>
-        <snapshotRepository>
+        <!-- <snapshotRepository>
             <id>junit-snapshot-repo</id>
             <name>Nexus Snapshot Repository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository> -->
+        <snapshotRepository>
+           <id>nexus-snapshots</id>
+           <name>Nexus Snapshot Repository</name>
+           <url>http://192.168.1.104:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>junit-releases-repo</id>
@@ -98,6 +103,10 @@
             <id>junit.github.io</id>
             <url>gitsite:git@github.com/junit-team/junit4.git</url>
         </site>
+        <snapshotRepository>
+           <id>nexus-snapshots</id>
+           <url>http://192.168.1.104:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <properties>
@@ -362,7 +371,7 @@
                         </manifest>
                         <manifestEntries>
                             <Automatic-Module-Name>junit</Automatic-Module-Name>
-                        </manifestEntries>                        
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
@@ -373,6 +382,15 @@
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
+                <executions>
+                  <execution>
+                    <id>default-deploy</id>
+                    <phase>deploy</phase>
+                    <goals>
+                      <goal>deploy</goal>
+                    </goals>
+                  </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
@@ -492,7 +510,7 @@
         <profile>
             <id>generate-docs</id>
             <!--
-            Generate the documentation artifacts. 
+            Generate the documentation artifacts.
             Note: this profile is also required to be active for release
             builds due to the packaging requirements of the Central repo
             -->
