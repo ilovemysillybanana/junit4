@@ -103,10 +103,6 @@
             <id>junit.github.io</id>
             <url>gitsite:git@github.com/junit-team/junit4.git</url>
         </site>
-        <snapshotRepository>
-           <id>nexus-snapshots</id>
-           <url>http://192.168.1.104:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <properties>
